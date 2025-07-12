@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health & Fitness Gym</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 0;
+      margin: 0;
+      background-color: #e0f2f7; /* Light Blue Background */
+      color: #333;
+    }
+    header {
+      background-color: #007bff; /* Vibrant Blue */
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative; /* For positioning the button */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8em;
+      letter-spacing: 1.5px;
+    }
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    .diet-plan-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #28a745; /* Green */
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .diet-plan-button:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+    section {
+      padding: 40px 20px;
+      margin: 0 auto;
+      max-width: 1200px;
+      background-color: white;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #007bff; /* Vibrant Blue */
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2em;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: #28a745; /* Green underline */
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-text {
+      flex: 2;
+      min-width: 300px;
+      line-height: 1.8;
+    }
+    .about-image {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+    .about-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .activity-item {
+      background-color: #f8f9fa; /* Light Grey */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .activity-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .activity-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .activity-item h3 {
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+    .activity-item p {
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .plan {
+      background-color: #f0f8ff; /* AliceBlue */
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: calc(33% - 30px); /* Adjusting for gap */
+      min-width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #cce7ff;
+    }
+    .plan:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    .plan h3 {
+      color: #007bff;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+    }
+    .plan .price {
+      font-size: 2.2em;
+      color: #28a745; /* Green */
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+    .plan ul li {
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+    }
+    .plan ul li::before {
+      content: '✔';
+      color: #28a745;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .plan-button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .plan-button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+    .offer {
+      background-color: #fff3cd; /* Light Yellow */
+      color: #856404; /* Dark Yellow */
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 25px;
+      font-weight: bold;
+      border: 1px solid #ffeeba;
+    }
+
+    form {
+      background-color: #f0f8ff; /* AliceBlue */
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #cce7ff;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #a8dadc; /* Light Blue Border */
+      box-sizing: border-box;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+    textarea {
+      resize: vertical;
+    }
+    button[type="submit"] {
+      padding: 12px 25px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1em;
+      display: block;
+      width: 100%;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button[type="submit"]:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content h3 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .modal-content img {
+      max-width: 80%;
+      height: auto;
+      margin-bottom: 20px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+    }
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .close-button:hover,
+    .close-button:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .payment-options button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+    .payment-options button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Success Pop-up Styles */
+    .success-popup {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .success-popup-content {
+      background-color: #d4edda; /* Light green */
+      color: #155724; /* Dark green */
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      font-size: 1.2em;
+      font-weight: bold;
+      position: relative;
+      border: 1px solid #c3e6cb;
+    }
+    .success-popup-content .close-button {
+      color: #155724;
+    }
+
+    @media (max-width: 768px) {
+      .plans {
+        flex-direction: column;
+        align-items: center;
+      }
+      .plan {
+        width: 90%;
+      }
+      .about-content {
+        flex-direction: column;
+      }
+      .diet-plan-button {
+        position: static;
+        margin-top: 15px;
+        display: inline-block;
+      }
+      header {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Health & Fitness Gym</h1>
+    <p>Your journey to a healthier life starts here</p>
+    <a href="D:\gym plan.jpg" class="diet-plan-button">Diet Plan</a>
+  </header>
+
+  <section>
+    <h2>About Our Gym</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Welcome to Health & Fitness Gym, a premier fitness destination dedicated to transforming lives through health and wellness. Established with a vision to create a supportive and motivating environment, our gym boasts state-of-the-art equipment and a team of highly certified and passionate trainers.</p>
+        <p>Whether you're looking to lose weight, build muscle, improve endurance, or simply maintain a healthy lifestyle, we have tailored programs and expert guidance to help you achieve your unique goals. We believe fitness is a journey, not a destination, and we're committed to walking every step of it with you, offering personalized support and encouragement.</p>
+        <p>Our facility is designed with your comfort and progress in mind, featuring spacious workout areas, modern amenities, and a vibrant community atmosphere. Join us and discover the difference a truly dedicated fitness partner can make!</p>
+      </div>
+      <div class="about-image">
+        <img src="https://homebrightside.com/wp-content/uploads/2024/05/Gym-Interior-Wall-Design_6.jpg" alt="Modern Gym Interior">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Our Activities & Facilities</h2>
+    <div class="activities-grid">
+      <div class="activity-item">
+        <img src="https://th.bing.com/th/id/R.e181b6405a211c95e9c3778d10a91cf0?rik=Qb9Mlli6GZ3fGA&riu=http%3a%2f%2fclipart-library.com%2fdata_images%2f85711.gif&ehk=ETu%2bZ7KrpQMfwcCuqf7JO70t7y6vawpxr5cGMsuyR3A%3d&risl=&pid=ImgRaw&r=0" alt="Strength Training">
+        <h3>Strength Training Zone</h3>
+        <p>Equipped with a wide range of free weights, resistance machines, and functional training equipment to build muscle and increase strength.</p>
+      </div>
+      <div class="activity-item">
+        <img src="https://farisgroup.net/wp-content/uploads/2023/05/5QV4TcUWvsfYmm9hAdWXHD-1200x675.jpg" alt="Cardio Machines">
+        <h3>Cardio & Endurance Area</h3>
+        <p>State-of-the-art treadmills, ellipticals, stationary bikes, and rowing machines for effective cardiovascular workouts.</p>
+      </div>
+      <div class="activity-item">
+        <img src="https://hips.hearstapps.com/hmg-prod/images/female-instructor-with-yoga-class-in-the-gym-royalty-free-image-700718696-1561407106.jpg?crop=0.668xw:1.00xh;0.153xw,0&resize=640:*" alt="Yoga Class">
+        <h3>Yoga & Mind-Body Studio</h3>
+        <p>Tranquil space for yoga, Pilates, and stretching classes, promoting flexibility, balance, and mental well-being.</p>
+      </div>
+      <div class="activity-item">
+        <img src="https://tse2.mm.bing.net/th/id/OIP._h8r9WcLznobuMlwPmjVCgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Zumba Class">
+        <h3>High-Energy Zumba & Group Classes</h3>
+        <p>Fun and engaging group sessions including Zumba, aerobics, and high-intensity interval training (HIIT) led by energetic instructors.</p>
+      </div>
+      <div class="activity-item">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.89W60L30LjJBEHMEgF0MVgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Personal Training">
+        <h3>Dedicated Personal Training</h3>
+        <p>One-on-one sessions with certified personal trainers who craft customized workout plans and provide expert guidance.</p>
+      </div>
+      <div class="activity-item">
+        <img src="https://4.bp.blogspot.com/-vJmTYTgW6Cs/T0cq4KgqGCI/AAAAAAAAADQ/I4LulgKXQpE/s1600/balanced-nutrition-guidelines.jpg" alt="Nutritional Guidance">
+        <h3>Nutritional Guidance & Counseling</h3>
+        <p>Expert advice and personalized meal plans to complement your fitness regimen and optimize your results.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Membership Plans</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Basic Plan</h3>
+        <p class="price">₹999/month</p>
+        <ul>
+          <li>Gym Access</li>
+          <li>Group Workouts</li>
+          <li>Locker Room Access</li>
+        </ul>
+        <button class="plan-button">Choose Basic</button>
+      </div>
+      <div class="plan">
+        <h3>Standard Plan</h3>
+        <p class="price">₹1999/month</p>
+        <ul>
+          <li>Gym + Cardio Access</li>
+          <li>All Group Classes</li>
+          <li>Personal Trainer (3 sessions/month)</li>
+          <li>Nutritional Tips</li>
+        </ul>
+        <div class="offer">🎉 Extra 20% Off for 2 Members!</div>
+        <button class="plan-button">Choose Standard</button>
+      </div>
+      <div class="plan">
+        <h3>Premium Plan</h3>
+        <p class="price">₹2999/month</p>
+        <ul>
+          <li>All Access (Gym, Cardio, Classes)</li>
+          <li>Unlimited Personal Training</li>
+          <li>Custom Diet & Nutrition Plans</li>
+          <li>24/7 Priority Support</li>
+          <li>Access to Wellness Workshops</li>
+        </ul>
+        <div class="offer">🎉 Extra 20% Off for 2 Members!</div>
+        <button class="plan-button">Choose Premium</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="diet-plan-info">
+    <h2>Our Diet & Nutrition Philosophy</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>At Health & Fitness Gym, we believe that true fitness is a combination of effective exercise and balanced nutrition. Our dedicated **diet and nutrition experts are here to guide you on a path to healthier eating habits that complement your workout routine.</p>
+        <p>We don't believe in restrictive diets, but rather in sustainable, evidence-based approaches to nutrition. Our plans are personalized to your body type, fitness goals, dietary preferences, and any health conditions. We empower you with the knowledge to make informed food choices for long-term well-being.</p>
+        <p>From initial assessment to ongoing support, our team will help you understand macronutrients, meal timing, hydration, and the role of various foods in achieving your desired results. Let us help you fuel your body right!</p>
+      </div>
+      <div class="about-image">
+        <img src="https://healthfitweightloss.com/wp-content/uploads/2022/12/How-important-is-nutrition-in-fitness.jpg" alt="Healthy Food Diet Plan">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Register Now</h2>
+    <form id="registrationForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <label for="plan">Select Membership Plan:</label>
+      <select id="plan" name="plan">
+        <option value="basic">Basic Plan - ₹999/month</option>
+        <option value="standard">Standard Plan - ₹1999/month</option>
+        <option value="premium">Premium Plan - ₹2999/month</option>
+      </select>
+
+      <label for="goals">Your Fitness Goals:</label>
+      <textarea id="goals" name="goals" rows="4" placeholder="e.g., Lose 10kg, build muscle, improve stamina, prepare for a marathon..."></textarea>
+
+      <button type="submit">Submit Registration</button>
+    </form>
+  </section>
+
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closePaymentModal">&times;</span>
+      <h3>Complete Your Payment</h3>
+      <p>Scan the QR code below using your UPI app:</p>
+      <img src="C:\Users\inapa\OneDrive\Pictures\QR code.jpg" alt="UPI QR Code" id="upiQrCode">
+      <div class="payment-options">
+        <p>Selected Plan: <strong id="selectedPlanName"></strong> - <strong id="selectedPlanPrice"></strong></p>
+        <button id="confirmPaymentButton">Confirm Payment (Simulated)</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="successPopup" class="success-popup">
+    <div class="success-popup-content">
+      <span class="close-button" id="closeSuccessPopup">&times;</span>
+      <p>🎉 You have successfully earned your gym membership!</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const registrationForm = document.getElementById('registrationForm');
+      const paymentModal = document.getElementById('paymentModal');
+      const closePaymentModal = document.getElementById('closePaymentModal');
+      const confirmPaymentButton = document.getElementById('confirmPaymentButton');
+      const successPopup = document.getElementById('successPopup');
+      const closeSuccessPopup = document.getElementById('closeSuccessPopup');
+      const selectedPlanName = document.getElementById('selectedPlanName');
+      const selectedPlanPrice = document.getElementById('selectedPlanPrice');
+      const planSelect = document.getElementById('plan');
+
+      // Function to show the modal
+      function showModal(modalElement) {
+        modalElement.style.display = 'flex';
+      }
+
+      // Function to hide the modal
+      function hideModal(modalElement) {
+        modalElement.style.display = 'none';
+      }
+
+      // Handle form submission
+      registrationForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get selected plan details
+        const selectedOption = planSelect.options[planSelect.selectedIndex];
+        const planText = selectedOption.textContent;
+        const [name, price] = planText.split(' - ');
+
+        selectedPlanName.textContent = name;
+        selectedPlanPrice.textContent = price;
+
+        // Show the payment modal
+        showModal(paymentModal);
+      });
+
+      // Close payment modal when the close button is clicked
+      closePaymentModal.addEventListener('click', () => {
+        hideModal(paymentModal);
+      });
+
+      // Close payment modal when clicking outside of it
+      window.addEventListener('click', (event) => {
+        if (event.target === paymentModal) {
+          hideModal(paymentModal);
+        }
+        if (event.target === successPopup) {
+          hideModal(successPopup);
+        }
+      });
+
+      // Simulate payment confirmation
+      confirmPaymentButton.addEventListener('click', () => {
+        hideModal(paymentModal); // Hide payment modal
+        showModal(successPopup); // Show success pop-up
+      });
+
+      // Close success pop-up
+      closeSuccessPopup.addEventListener('click', () => {
+        hideModal(successPopup);
+        registrationForm.reset(); // Optionally reset the form after successful registration
+      });
+    });
+  </script>
+
+</body>
+</html>
